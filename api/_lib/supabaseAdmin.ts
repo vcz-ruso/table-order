@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { env } from "./env";
+import { env } from "./env.js";
 
 // 서버 전용 Supabase 클라이언트. service_role 키를 사용하여 RLS 를 우회하며,
 // 접근 제어(역할/소유권)는 API 레이어(withAuth)에서 검증한다.

@@ -1,31 +1,31 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { ApiError, handlePreflight, sendError, setCors } from "./_lib/http";
+import { ApiError, handlePreflight, sendError, setCors } from "./_lib/http.js";
 
 // 인증
-import authLogin from "./_routes/auth/login";
-import authRefresh from "./_routes/auth/refresh";
-import authLogout from "./_routes/auth/logout";
-import authMe from "./_routes/auth/me";
+import authLogin from "./_routes/auth/login.js";
+import authRefresh from "./_routes/auth/refresh.js";
+import authLogout from "./_routes/auth/logout.js";
+import authMe from "./_routes/auth/me.js";
 // 주문 / 테이블
-import ordersIndex from "./_routes/orders/index";
-import ordersById from "./_routes/orders/by-id";
-import tablesIndex from "./_routes/tables/index";
-import tablesComplete from "./_routes/tables/complete";
-import tablesHistory from "./_routes/tables/history";
+import ordersIndex from "./_routes/orders/index.js";
+import ordersById from "./_routes/orders/by-id.js";
+import tablesIndex from "./_routes/tables/index.js";
+import tablesComplete from "./_routes/tables/complete.js";
+import tablesHistory from "./_routes/tables/history.js";
 // 메뉴
-import menusIndex from "./_routes/menus/index";
-import menusById from "./_routes/menus/by-id";
-import menusReorder from "./_routes/menus/reorder";
+import menusIndex from "./_routes/menus/index.js";
+import menusById from "./_routes/menus/by-id.js";
+import menusReorder from "./_routes/menus/reorder.js";
 // 매출 / 재고
-import salesSummary from "./_routes/sales/summary";
-import salesDetail from "./_routes/sales/detail";
-import inventoryIndex from "./_routes/inventory/index";
-import inventoryRecords from "./_routes/inventory/records";
+import salesSummary from "./_routes/sales/summary.js";
+import salesDetail from "./_routes/sales/detail.js";
+import inventoryIndex from "./_routes/inventory/index.js";
+import inventoryRecords from "./_routes/inventory/records.js";
 // 고객
-import customerTableLogin from "./_routes/customer/table-login";
-import customerMenus from "./_routes/customer/menus";
-import customerSession from "./_routes/customer/session";
-import customerOrders from "./_routes/customer/orders";
+import customerTableLogin from "./_routes/customer/table-login.js";
+import customerMenus from "./_routes/customer/menus.js";
+import customerSession from "./_routes/customer/session.js";
+import customerOrders from "./_routes/customer/orders.js";
 
 type Handler = (req: VercelRequest, res: VercelResponse) => unknown;
 

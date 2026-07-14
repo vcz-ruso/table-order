@@ -1,6 +1,6 @@
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withAuth } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withAuth } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
 
 // GET /api/tables — 테이블 관리 화면용. 각 테이블의 active 세션/주문건수/총액.
 export default withAuth(async (req, res, { user }) => {

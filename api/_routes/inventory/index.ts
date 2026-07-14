@@ -1,8 +1,8 @@
-import { resolveDate } from "../../_lib/dates";
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withAuth } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { queryString } from "../../_lib/validation";
+import { resolveDate } from "../../_lib/dates.js";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withAuth } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { queryString } from "../../_lib/validation.js";
 
 // GET /api/inventory?date=YYYY-MM-DD — 원재료 목록 + 해당일 재고 기록(잔량/소모량). (Owner 전용)
 export default withAuth(

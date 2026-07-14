@@ -1,4 +1,4 @@
-import { ApiError } from "./http";
+import { ApiError } from "./http.js";
 
 // 파라미터 타입/길이/형식 검증 (SECURITY-05). 실패 시 ApiError(422) throw.
 

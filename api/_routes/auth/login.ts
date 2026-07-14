@@ -6,11 +6,11 @@ import {
   signAccessToken,
   signRefreshToken,
   verifyPassword,
-} from "../../_lib/auth";
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { publicHandler } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { asObject, isValidPassword, requireString } from "../../_lib/validation";
+} from "../../_lib/auth.js";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { publicHandler } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { asObject, isValidPassword, requireString } from "../../_lib/validation.js";
 
 const MAX_ATTEMPTS = 3;
 

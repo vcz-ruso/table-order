@@ -1,8 +1,8 @@
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withTable } from "../../_lib/middleware";
-import { mapOrder, type DbOrder } from "../../_lib/mappers";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { asObject } from "../../_lib/validation";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withTable } from "../../_lib/middleware.js";
+import { mapOrder, type DbOrder } from "../../_lib/mappers.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { asObject } from "../../_lib/validation.js";
 
 const ORDER_SELECT =
   "id, order_number, table_id, table_session_id, status, total_amount, created_at, order_items(id, menu_id, menu_name, unit_price, quantity, options)";

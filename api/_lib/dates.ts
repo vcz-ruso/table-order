@@ -1,4 +1,4 @@
-import { ApiError } from "./http";
+import { ApiError } from "./http.js";
 
 // 매출/재고의 "일자"는 매장 로컬(KST, +09:00) 기준으로 해석한다.
 // 서버 타임존(UTC 등)에 무관하게 동작하도록 오프셋을 명시한다.

@@ -1,9 +1,9 @@
 import type { VercelRequest } from "@vercel/node";
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withAuth } from "../../_lib/middleware";
-import { mapOrder, type DbOrder } from "../../_lib/mappers";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { asObject, queryString, requireEnum } from "../../_lib/validation";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withAuth } from "../../_lib/middleware.js";
+import { mapOrder, type DbOrder } from "../../_lib/mappers.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { asObject, queryString, requireEnum } from "../../_lib/validation.js";
 
 type Status = "pending" | "preparing" | "done";
 const FORWARD: Record<Status, Status | null> = { pending: "preparing", preparing: "done", done: null };

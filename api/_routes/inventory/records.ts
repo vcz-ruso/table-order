@@ -1,8 +1,8 @@
-import { resolveDate } from "../../_lib/dates";
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withAuth } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { asObject } from "../../_lib/validation";
+import { resolveDate } from "../../_lib/dates.js";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withAuth } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { asObject } from "../../_lib/validation.js";
 
 interface RecordInput {
   ingredientId: string;

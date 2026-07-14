@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { createHash, randomUUID } from "node:crypto";
-import { env } from "./env";
-import { ApiError } from "./http";
+import { env } from "./env.js";
+import { ApiError } from "./http.js";
 
 export type Role = "owner" | "staff";
 

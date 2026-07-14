@@ -1,6 +1,6 @@
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withTable } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withTable } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
 
 // GET /api/customer/menus — 노출 메뉴(비노출 제외) + 카테고리 + 옵션.
 export default withTable(async (req, res, { table }) => {

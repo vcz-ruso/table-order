@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { verifyAccessToken, verifyTableToken, type Role } from "./auth";
-import { ApiError, handlePreflight, sendError, setCors } from "./http";
-import { supabaseAdmin } from "./supabaseAdmin";
+import { verifyAccessToken, verifyTableToken, type Role } from "./auth.js";
+import { ApiError, handlePreflight, sendError, setCors } from "./http.js";
+import { supabaseAdmin } from "./supabaseAdmin.js";
 
 export interface AuthedUser {
   id: string;

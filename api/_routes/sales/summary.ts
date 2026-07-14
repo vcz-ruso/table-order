@@ -1,8 +1,8 @@
-import { dayRangeIso, resolveDate } from "../../_lib/dates";
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { withAuth } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { queryString } from "../../_lib/validation";
+import { dayRangeIso, resolveDate } from "../../_lib/dates.js";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { withAuth } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { queryString } from "../../_lib/validation.js";
 
 // GET /api/sales/summary?date=YYYY-MM-DD — 오늘(기본) 총 매출/주문 건수. (Owner 전용)
 export default withAuth(

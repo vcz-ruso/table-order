@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { signTableToken, verifyPassword } from "../../_lib/auth";
-import { ApiError, assertMethod, sendJson } from "../../_lib/http";
-import { publicHandler } from "../../_lib/middleware";
-import { supabaseAdmin } from "../../_lib/supabaseAdmin";
-import { asObject, requireInt, requireString } from "../../_lib/validation";
+import { signTableToken, verifyPassword } from "../../_lib/auth.js";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http.js";
+import { publicHandler } from "../../_lib/middleware.js";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { asObject, requireInt, requireString } from "../../_lib/validation.js";
 
 // POST /api/customer/table-login { storeCode, tableNumber, tablePassword }
 // 관리자가 태블릿 초기 설정 시 1회 수행. 성공 시 장기 table 토큰 발급 → 자동 로그인.
