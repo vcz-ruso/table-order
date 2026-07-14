@@ -127,19 +127,30 @@ npm run db:setup     # = db:migrate(0001+0002) + seed
 
 ### 로컬 실행 (API 포함)
 
-프론트(`npm run dev`)만으로는 `/api` 서버리스 함수가 동작하지 않습니다. API까지 함께 실행하려면
-Vercel CLI를 사용하세요.
+로컬에서 프론트 + `/api` 함수를 함께 쓰려면 **터미널 2개**를 사용합니다.
+`vercel dev` 단독으로 프론트까지 서빙하면, `vercel dev` 프록시가 SPA rewrite(`→ /index.html`)를
+Vite의 모듈 요청(`/src/main.tsx` 등)에까지 적용해 *"Failed to parse source for import analysis"*
+에러가 납니다(Vercel + Vite의 알려진 이슈). 그래서 프론트는 Vite로, API만 함수 런타임으로 띄웁니다.
 
 ```bash
-npm i -g vercel
-vercel dev        # 프론트 + /api 서버리스 함수 동시 실행
+# 터미널 1 — 서버리스 함수 (포트 3000)
+npm i -g vercel        # 최초 1회
+npm run dev:api        # = vercel dev --listen 3000  (여기서 프론트 창은 열지 않음)
+
+# 터미널 2 — 프론트 (포트 5173). /api 요청은 위 3000 으로 자동 프록시됨
+npm run dev            # http://localhost:5173 접속
 ```
+
+- Vite dev 서버가 SPA 라우팅을 네이티브로 처리하므로 딥링크/새로고침이 정상 동작합니다.
+- 함수를 로컬에 안 띄우고 **배포된 API로 붙이려면**: `VITE_API_PROXY=https://<프로젝트>.vercel.app npm run dev`
+- 프로덕션 배포에서는 `vercel.json` 의 SPA rewrite 가 딥링크를 index.html 로 폴백합니다(정상).
 
 ### 관리자 관련 npm 스크립트
 
 ```bash
 npm run typecheck:api   # api/ 서버리스 함수 타입 검사
 npm run seed            # 초기 데이터 시드 (스키마 적용 후)
+npm run db:setup        # 마이그레이션 + 시드 (SUPABASE_DB_URL 필요)
 ```
 
 ## 고객(Customer) 기능
