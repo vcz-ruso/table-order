@@ -97,28 +97,29 @@ async function main() {
 
   // 5) 메뉴 --------------------------------------------------------------------
   // 무드를 위해 흑백(grayscale) 이미지를 사용
-  const img = (seed) => `https://picsum.photos/seed/${seed}/600/400?grayscale`;
+  // 음식 사진 (loremflickr — 태그 기반 실제 음식 이미지, lock 으로 고정). 컬러/따뜻한 톤.
+  const foodImg = (tag, lock) => `https://loremflickr.com/640/480/${tag}?lock=${lock}`;
   const menuDefs = [
     // 체크인 스페셜
-    { category: "체크인 스페셜", name: "체크인 스테이크", price: 24000, description: "오늘 밤 가장 먼저 권해드리는 객실 정찬", sort_order: 1, image_url: img("nocturne-steak") },
+    { category: "체크인 스페셜", name: "체크인 스테이크", price: 24000, description: "오늘 밤 가장 먼저 권해드리는 객실 정찬", sort_order: 1, image_url: foodImg("steak", 101) },
     // 객실 정찬
-    { category: "객실 정찬", name: "붉은 커튼 토마토 파스타", price: 16000, description: "복도 끝 붉은 커튼 뒤에서 시작된 시그니처 메뉴", sort_order: 1, image_url: img("nocturne-tomato") },
-    { category: "객실 정찬", name: "월광 크림 리조또", price: 17000, description: "조용한 밤에 가장 잘 어울리는 부드러운 한 접시", sort_order: 2, image_url: img("nocturne-risotto") },
-    { category: "객실 정찬", name: "검은 복도의 오징어먹물 리조또", price: 18000, description: "호텔의 가장 어두운 복도에서 영감을 받은 시그니처", sort_order: 3, image_url: img("nocturne-squidink") },
-    { category: "객실 정찬", name: "유령 신사의 비프 스튜", price: 19000, description: "오래된 기록 속에 자주 등장하는 깊고 진한 스튜", sort_order: 4, image_url: img("nocturne-stew") },
-    { category: "객실 정찬", name: "심야 로스트 치킨", price: 21000, description: "늦은 시간 투숙객이 가장 자주 찾는 메뉴", sort_order: 5, image_url: img("nocturne-chicken") },
+    { category: "객실 정찬", name: "붉은 커튼 토마토 파스타", price: 16000, description: "복도 끝 붉은 커튼 뒤에서 시작된 시그니처 메뉴", sort_order: 1, image_url: foodImg("pasta,tomato", 102) },
+    { category: "객실 정찬", name: "월광 크림 리조또", price: 17000, description: "조용한 밤에 가장 잘 어울리는 부드러운 한 접시", sort_order: 2, image_url: foodImg("risotto", 103) },
+    { category: "객실 정찬", name: "검은 복도의 오징어먹물 리조또", price: 18000, description: "호텔의 가장 어두운 복도에서 영감을 받은 시그니처", sort_order: 3, image_url: foodImg("risotto,seafood", 104) },
+    { category: "객실 정찬", name: "유령 신사의 비프 스튜", price: 19000, description: "오래된 기록 속에 자주 등장하는 깊고 진한 스튜", sort_order: 4, image_url: foodImg("beef,stew", 105) },
+    { category: "객실 정찬", name: "심야 로스트 치킨", price: 21000, description: "늦은 시간 투숙객이 가장 자주 찾는 메뉴", sort_order: 5, image_url: foodImg("roast,chicken", 106) },
     // 심야 바 카트
-    { category: "심야 바 카트", name: "블러디 오렌지 에이드", price: 9000, description: "붉게 번지는 색감이 매력적인 심야 시그니처 드링크", sort_order: 1, image_url: img("nocturne-orange") },
-    { category: "심야 바 카트", name: "월광 하이볼", price: 12000, description: "달빛 아래 천천히 즐기는 한 잔", sort_order: 2, image_url: img("nocturne-highball") },
-    { category: "심야 바 카트", name: "심야 하우스 레드", price: 13000, description: "늦은 밤을 위한 하우스 레드 와인", sort_order: 3, image_url: img("nocturne-wine") },
+    { category: "심야 바 카트", name: "블러디 오렌지 에이드", price: 9000, description: "붉게 번지는 색감이 매력적인 심야 시그니처 드링크", sort_order: 1, image_url: foodImg("orange,drink", 107) },
+    { category: "심야 바 카트", name: "월광 하이볼", price: 12000, description: "달빛 아래 천천히 즐기는 한 잔", sort_order: 2, image_url: foodImg("cocktail", 108) },
+    { category: "심야 바 카트", name: "심야 하우스 레드", price: 13000, description: "늦은 밤을 위한 하우스 레드 와인", sort_order: 3, image_url: foodImg("wine,glass", 109) },
     // 야간 디저트 라운지
-    { category: "야간 디저트 라운지", name: "체크아웃 티라미수", price: 9500, description: "오늘 밤의 마지막을 가장 완벽하게 마무리하는 디저트", sort_order: 1, image_url: img("nocturne-tiramisu") },
-    { category: "야간 디저트 라운지", name: "월광 치즈케이크", price: 9000, description: "달빛처럼 조용하게 남는 부드러운 디저트", sort_order: 2, image_url: img("nocturne-cheesecake") },
+    { category: "야간 디저트 라운지", name: "체크아웃 티라미수", price: 9500, description: "오늘 밤의 마지막을 가장 완벽하게 마무리하는 디저트", sort_order: 1, image_url: foodImg("tiramisu", 110) },
+    { category: "야간 디저트 라운지", name: "월광 치즈케이크", price: 9000, description: "달빛처럼 조용하게 남는 부드러운 디저트", sort_order: 2, image_url: foodImg("cheesecake", 111) },
     // 컨시어지 추천
-    { category: "컨시어지 추천", name: "Room 404 트러플 프라이", price: 11000, description: "이상하게도 늘 먼저 사라지는 객실 스낵", sort_order: 1, image_url: img("nocturne-fries") },
+    { category: "컨시어지 추천", name: "Room 404 트러플 프라이", price: 11000, description: "이상하게도 늘 먼저 사라지는 객실 스낵", sort_order: 1, image_url: foodImg("fries", 112) },
     // 추가 요청 (곁들임)
-    { category: "추가 요청", name: "심야 치즈 플래터", price: 15000, description: "조용한 대화를 위한 곁들임 한 접시", sort_order: 1, image_url: img("nocturne-cheese") },
-    { category: "추가 요청", name: "야식 감자 웨지", price: 7000, description: "부담 없이 더하는 심야의 곁들임", sort_order: 2, image_url: img("nocturne-wedge") },
+    { category: "추가 요청", name: "심야 치즈 플래터", price: 15000, description: "조용한 대화를 위한 곁들임 한 접시", sort_order: 1, image_url: foodImg("cheese,platter", 113) },
+    { category: "추가 요청", name: "야식 감자 웨지", price: 7000, description: "부담 없이 더하는 심야의 곁들임", sort_order: 2, image_url: foodImg("potato,wedges", 114) },
   ];
   const existingMenus = await must(
     db.from("menus").select("id,name").eq("store_id", storeId),
@@ -143,6 +144,12 @@ async function main() {
   }
   const menuByName = Object.fromEntries(menus.map((m) => [m.name, m]));
   console.log(`  ✅ 메뉴 ${menus.length}개`);
+
+  // 5.1) 이미지 URL 최신화 (기존 메뉴도 음식 사진으로 갱신 — 멱등)
+  for (const m of menuDefs) {
+    await db.from("menus").update({ image_url: m.image_url }).eq("store_id", storeId).eq("name", m.name);
+  }
+  console.log("  ✅ 메뉴 이미지 음식 사진으로 최신화");
 
   // 5.5) 메뉴 옵션 (멱등: 기존 그룹 정리 후 재삽입, items 는 cascade 삭제) ------
   const menuIds = menus.map((m) => m.id);

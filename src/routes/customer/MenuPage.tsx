@@ -48,7 +48,7 @@ export function MenuPage() {
     setTimeout(() => setToast(null), 2200);
   };
 
-  if (loading) return <div className="c-loading">오늘 밤의 기록을 여는 중…</div>;
+  if (loading) return <div className="c-loading">메뉴를 불러오는 중…</div>;
   if (error) return <div className="c-error">{error}</div>;
 
   return (
@@ -57,7 +57,7 @@ export function MenuPage() {
 
       <div className="cust-cats">
         <button className={`cust-cat ${activeCat === null ? "active" : ""}`} onClick={() => setActiveCat(null)}>
-          전체 기록
+          전체
         </button>
         {categories.map((c) => (
           <button
@@ -74,9 +74,9 @@ export function MenuPage() {
       {activeCat === null && featured.length > 0 && (
         <section>
           <div className="section-head">
-            <span className="st-title">오늘의 기록</span>
+            <span className="st-title">오늘의 추천</span>
             <span className="st-line" />
-            <span className="st-note">오늘 밤 자주 기록된 메뉴입니다</span>
+            <span className="st-note">오늘 밤 가장 사랑받는 한 끼</span>
           </div>
           <div className="concierge">
             {featured.map((menu) => (

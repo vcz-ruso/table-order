@@ -104,14 +104,13 @@ export function CustomerApp() {
 
       {view === "menu" && (
         <section className="hero">
-          <div className="hero-kicker">오늘 밤의 투숙객 전용</div>
+          <div className="hero-kicker">Nocturne Hotel · Late-Night Dining</div>
           <h2 className="hero-title">
-            늦은 밤에만 열리는 메뉴가 있습니다.
-            <br />
-            오늘 밤의 투숙객 전용 룸서비스를 확인해보세요.
+            <span className="hero-line">늦은 밤에만 열리는 메뉴가 있습니다.</span>
+            <span className="hero-line">오늘 밤의 투숙객 전용 룸서비스를 확인해보세요.</span>
           </h2>
-          <p className="hero-sub">조용한 복도 끝, 가장 오래 기억에 남을 한 끼를 준비했습니다.</p>
           <div className="hero-rule" />
+          <p className="hero-sub">조용한 밤에 어울리는 가장 인상적인 한 끼를 준비했습니다.</p>
         </section>
       )}
 
