@@ -5,6 +5,10 @@ node_modules/
 dist/
 .vercel/
 
+# Supabase CLI 로컬 상태 (링크 정보/풀러 URL 등 — 커밋 금지)
+supabase/.temp/
+supabase/.branches/
+
 # Environment variables
 .env
 .env.local
