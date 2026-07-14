@@ -5,8 +5,8 @@ export type Role = "owner" | "staff";
 export type OrderStatus = "pending" | "preparing" | "done";
 
 export const ORDER_STATUS_LABEL: Record<OrderStatus, string> = {
-  pending: "대기중",
-  preparing: "준비중",
+  pending: "요청 접수",
+  preparing: "준비 중",
   done: "완료",
 };
 
@@ -95,6 +95,7 @@ export interface Menu {
   sortOrder: number;
   isHidden: boolean;
   isSoldOut: boolean;
+  isRecommended: boolean;
 }
 
 export interface Ingredient {
@@ -176,6 +177,7 @@ export interface CustomerMenu {
   description: string;
   imageUrl: string;
   isSoldOut: boolean;
+  isRecommended: boolean;
   options: MenuOptionGroup[];
 }
 

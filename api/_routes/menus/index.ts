@@ -5,7 +5,7 @@ import { supabaseAdmin } from "../../_lib/supabaseAdmin.js";
 import { asObject, isValidImageUrl, requireInt, requireString, requireUuid } from "../../_lib/validation.js";
 
 const MENU_SELECT =
-  "id, category_id, name, price, description, image_url, sort_order, is_hidden, is_sold_out, categories(name)";
+  "id, category_id, name, price, description, image_url, sort_order, is_hidden, is_sold_out, is_recommended, categories(name)";
 
 // GET  /api/menus — 관리자용 전체 메뉴(비노출 포함) + 카테고리. (Owner 전용)
 // POST /api/menus — 메뉴 등록. 모든 필드 필수, 이미지 URL 필수/형식 검증. (Owner 전용)

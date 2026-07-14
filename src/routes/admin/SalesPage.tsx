@@ -48,7 +48,7 @@ export function SalesPage() {
         <>
           <div className="summary-bar">
             <div className="summary-card">
-              <div className="label">총 매출액 (완료 주문)</div>
+              <div className="label">총 매출액 (완료 요청)</div>
               <div className="value">{formatWon(detail!.totalSales)}</div>
             </div>
             <div className="summary-card">
@@ -60,7 +60,7 @@ export function SalesPage() {
               <div className="value">{formatWon(detail!.netSales)}</div>
             </div>
             <div className="summary-card">
-              <div className="label">완료 주문 건수</div>
+              <div className="label">완료 요청 건수</div>
               <div className="value">{detail!.orderCount}건</div>
             </div>
           </div>

@@ -303,6 +303,16 @@ body {
   padding: 12px 15px 14px;
   background: var(--surface);
 }
+.concierge-card .cc-badge {
+  display: inline-block;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--burgundy);
+  border-radius: 20px;
+  padding: 2px 9px;
+  margin-bottom: 6px;
+}
 .concierge-card .cc-name {
   font-family: var(--serif);
   font-size: 16px;

@@ -24,7 +24,7 @@ export function TableManagePage() {
       setOrders(data.orders);
       setError(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "테이블을 불러오지 못했습니다.");
+      setError(e instanceof Error ? e.message : "객실을 불러오지 못했습니다.");
     } finally {
       setLoading(false);
     }
@@ -41,7 +41,7 @@ export function TableManagePage() {
 
   return (
     <div>
-      <h1 className="admin-page-title">테이블 관리</h1>
+      <h1 className="admin-page-title">객실 관리</h1>
       {toast && <div className="form-ok">{toast}</div>}
       {error && <div className="form-error">{error}</div>}
 
@@ -51,23 +51,23 @@ export function TableManagePage() {
         <div className="table-grid">
           {cards.map((card) => (
             <div key={card.table.id} className={`table-card ${card.isEmpty ? "empty" : ""}`} style={{ cursor: "default" }}>
-              <div className="tnum">{card.table.tableNumber}번 테이블</div>
+              <div className="tnum">{card.table.tableNumber}번 객실</div>
               <div className="ttotal">{formatWon(card.totalAmount)}</div>
-              <div className="badge-count">주문 {card.orderCount}건 · {card.isEmpty ? "빈 테이블" : "이용 중"}</div>
+              <div className="badge-count">요청 {card.orderCount}건 · {card.isEmpty ? "빈 객실" : "이용 중"}</div>
               <div style={{ display: "flex", gap: 6, marginTop: 12, flexWrap: "wrap" }}>
                 <button
                   className="btn btn-sm"
                   disabled={card.isEmpty}
                   onClick={() => setManageTable(card)}
                 >
-                  주문 관리
+                  요청 관리
                 </button>
                 <button
                   className="btn btn-sm btn-primary"
                   disabled={card.isEmpty}
                   onClick={() => setCompleteTarget(card)}
                 >
-                  이용 완료
+                  체크아웃
                 </button>
                 <button
                   className="btn btn-sm"
@@ -89,21 +89,21 @@ export function TableManagePage() {
           onChanged={async () => {
             await load();
             setManageTable(null);
-            flash("주문을 삭제했습니다.");
+            flash("요청을 삭제했습니다.");
           }}
         />
       )}
 
       {completeTarget && (
         <ConfirmDialog
-          title="매장 이용 완료"
-          message={`${completeTarget.table.tableNumber}번 테이블의 현재 세션을 종료합니다.\n주문 내역은 과거 이력으로 이동하고 현재 주문 목록은 초기화됩니다.\n계속하시겠습니까?`}
-          confirmLabel="이용 완료"
+          title="체크아웃"
+          message={`${completeTarget.table.tableNumber}번 객실의 현재 세션을 종료합니다.\n요청 내역은 과거 이력으로 이동하고 현재 요청 목록은 초기화됩니다.\n계속하시겠습니까?`}
+          confirmLabel="체크아웃"
           onConfirm={async () => {
             const r = await api.completeTable(completeTarget.table.id);
             setCompleteTarget(null);
             await load();
-            flash(`${r.tableNumber}번 테이블 이용 완료 — 매출 ${formatWon(r.sessionTotal)} (${r.orderCount}건)`);
+            flash(`${r.tableNumber}번 객실 체크아웃 — 매출 ${formatWon(r.sessionTotal)} (${r.orderCount}건)`);
           }}
           onCancel={() => setCompleteTarget(null)}
         />
@@ -135,11 +135,11 @@ function ManageOrdersModal({
   const sorted = sortByCreatedDesc(orders);
 
   return (
-    <Modal title={`${card.table.tableNumber}번 테이블 주문 관리`} onClose={onClose}>
+    <Modal title={`${card.table.tableNumber}번 객실 요청 관리`} onClose={onClose}>
       <p className="muted" style={{ marginTop: 0 }}>
-        주문 삭제는 직권 수정이며 삭제 로그가 기록됩니다.
+        요청 삭제는 직권 수정이며 삭제 로그가 기록됩니다.
       </p>
-      {sorted.length === 0 && <p className="muted">주문이 없습니다.</p>}
+      {sorted.length === 0 && <p className="muted">요청이 없습니다.</p>}
       {sorted.map((order) => (
         <div
           key={order.id}
@@ -147,7 +147,7 @@ function ManageOrdersModal({
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span>
-              <strong>주문 #{order.orderNumber}</strong> · {formatTime(order.createdAt)}
+              <strong>요청 #{order.orderNumber}</strong> · {formatTime(order.createdAt)}
             </span>
             <span className={`status-badge ${order.status}`}>{ORDER_STATUS_LABEL[order.status]}</span>
           </div>
@@ -169,8 +169,8 @@ function ManageOrdersModal({
 
       {deleteTarget && (
         <ConfirmDialog
-          title="주문 삭제"
-          message={`주문 #${deleteTarget.orderNumber} (${formatWon(deleteTarget.totalAmount)})을 삭제합니다.\n이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?`}
+          title="요청 삭제"
+          message={`요청 #${deleteTarget.orderNumber} (${formatWon(deleteTarget.totalAmount)})을 삭제합니다.\n이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?`}
           confirmLabel="삭제"
           danger
           onConfirm={async () => {
@@ -218,7 +218,7 @@ function HistoryModal({
   }, [load]);
 
   return (
-    <Modal title={`${tableNumber}번 테이블 과거 내역`} onClose={onClose}>
+    <Modal title={`${tableNumber}번 객실 과거 내역`} onClose={onClose}>
       <div className="filter-bar">
         <label>
           시작 <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
@@ -232,7 +232,7 @@ function HistoryModal({
       {loading ? (
         <div className="admin-loading">불러오는 중…</div>
       ) : rows.length === 0 ? (
-        <p className="muted">과거 주문 내역이 없습니다.</p>
+        <p className="muted">과거 요청 내역이 없습니다.</p>
       ) : (
         rows.map(({ order, sessionClosedAt }) => (
           <div
@@ -240,7 +240,7 @@ function HistoryModal({
             style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 12, marginBottom: 10 }}
           >
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <strong>주문 #{order.orderNumber}</strong>
+              <strong>요청 #{order.orderNumber}</strong>
               <span className="muted">{formatDateTime(order.createdAt)}</span>
             </div>
             <ul style={{ margin: "8px 0", paddingLeft: 18 }}>
@@ -252,7 +252,7 @@ function HistoryModal({
             </ul>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <strong>{formatWon(order.totalAmount)}</strong>
-              <span className="muted">이용완료: {sessionClosedAt ? formatDateTime(sessionClosedAt) : "-"}</span>
+              <span className="muted">체크아웃: {sessionClosedAt ? formatDateTime(sessionClosedAt) : "-"}</span>
             </div>
           </div>
         ))

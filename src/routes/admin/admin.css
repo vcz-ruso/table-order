@@ -515,6 +515,10 @@ body {
   background: var(--danger);
   color: #fff;
 }
+.label-tag.rec {
+  background: #b8860b;
+  color: #fff;
+}
 .cat-tab {
   display: flex;
   gap: 6px;

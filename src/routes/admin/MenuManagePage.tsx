@@ -63,6 +63,17 @@ export function MenuManagePage() {
     }
   };
 
+  // 오늘의 추천 지정/해제 (매장당 1개 — 지정 시 서버가 나머지 해제)
+  const toggleRecommend = async (menu: Menu) => {
+    try {
+      await api.updateMenu(menu.id, { isRecommended: !menu.isRecommended });
+      await load();
+      flash(menu.isRecommended ? "오늘의 추천을 해제했습니다." : `‘${menu.name}’을(를) 오늘의 추천으로 지정했습니다.`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "추천 지정 실패");
+    }
+  };
+
   // 드래그앤드롭 순서 변경 (같은 카테고리 내)
   const onDrop = async (targetId: string) => {
     if (!dragId || dragId === targetId || !activeCat) return;
@@ -132,6 +143,7 @@ export function MenuManagePage() {
               <div>
                 <div className="mname">
                   {menu.name}
+                  {menu.isRecommended && <span className="label-tag rec">오늘의 추천</span>}
                   {menu.isHidden && <span className="label-tag hidden">비노출</span>}
                   {menu.isSoldOut && <span className="label-tag soldout">품절</span>}
                 </div>
@@ -144,6 +156,14 @@ export function MenuManagePage() {
                 <button className="btn btn-sm" onClick={() => setEditing(menu)}>
                   수정
                 </button>
+                {!menu.isHidden && (
+                  <button
+                    className={menu.isRecommended ? "btn btn-sm btn-primary" : "btn btn-sm"}
+                    onClick={() => toggleRecommend(menu)}
+                  >
+                    {menu.isRecommended ? "추천 해제" : "오늘의 추천"}
+                  </button>
+                )}
                 <button className="btn btn-sm" onClick={() => toggleSoldOut(menu)}>
                   {menu.isSoldOut ? "품절 해제" : "품절"}
                 </button>

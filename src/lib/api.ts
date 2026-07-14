@@ -231,7 +231,7 @@ export const api = {
     description: string;
     imageUrl: string;
   }) => request<{ menu: Menu }>("/menus", { method: "POST", body: input }),
-  updateMenu: (id: string, patch: Partial<{ name: string; price: number; categoryId: string; description: string; imageUrl: string; isHidden: boolean; isSoldOut: boolean }>) =>
+  updateMenu: (id: string, patch: Partial<{ name: string; price: number; categoryId: string; description: string; imageUrl: string; isHidden: boolean; isSoldOut: boolean; isRecommended: boolean }>) =>
     request<{ menu: Menu }>(`/menus/${id}`, { method: "PATCH", body: patch }),
   hideMenu: (id: string) => request<{ ok: boolean }>(`/menus/${id}`, { method: "DELETE" }),
   reorderMenus: (categoryId: string, orderedIds: string[]) =>

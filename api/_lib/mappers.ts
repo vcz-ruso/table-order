@@ -61,6 +61,7 @@ export interface DbMenu {
   sort_order: number;
   is_hidden: boolean;
   is_sold_out: boolean;
+  is_recommended?: boolean;
   categories?: { name: string } | { name: string }[] | null;
 }
 
@@ -78,5 +79,6 @@ export function mapMenu(row: DbMenu) {
     sortOrder: row.sort_order,
     isHidden: row.is_hidden,
     isSoldOut: row.is_sold_out,
+    isRecommended: row.is_recommended ?? false,
   };
 }

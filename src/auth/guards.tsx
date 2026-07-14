@@ -24,7 +24,7 @@ export function RequireRole({ role, children }: { role: Role; children: ReactNod
     return (
       <div className="admin-forbidden" role="alert">
         <h2>권한이 없습니다</h2>
-        <p>이 기능은 Owner 계정만 사용할 수 있습니다.</p>
+        <p>이 기능은 Manager 계정만 사용할 수 있습니다.</p>
       </div>
     );
   }

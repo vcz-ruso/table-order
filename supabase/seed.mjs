@@ -59,25 +59,25 @@ async function main() {
   );
   console.log("  ✅ 관리자 계정: owner(Owner), staff(Staff)");
 
-  // 3) 테이블(5개) -------------------------------------------------------------
-  const tableRows = [1, 2, 3, 4, 5].map((n) => ({
+  // 3) 객실(4개 고정) ---------------------------------------------------------
+  const tableRows = [1, 2, 3, 4].map((n) => ({
     store_id: storeId,
     table_number: n,
     password_hash: hash(TABLE_PW),
   }));
   const tables = await must(
     db.from("dining_tables").upsert(tableRows, { onConflict: "store_id,table_number" }).select(),
-    "테이블 upsert",
+    "객실 upsert",
   );
-  console.log(`  ✅ 테이블 ${tables.length}개 (1~5)`);
+  console.log(`  ✅ 객실 ${tables.length}개 (1~4)`);
 
   // 4) 카테고리 ----------------------------------------------------------------
   const categoryDefs = [
     { name: "체크인 스페셜", sort_order: 1 },
     { name: "객실 정찬", sort_order: 2 },
-    { name: "심야 바 카트", sort_order: 3 },
+    { name: "심야 바 카드", sort_order: 3 },
     { name: "야간 디저트 라운지", sort_order: 4 },
-    { name: "컨시어지 추천", sort_order: 5 },
+    { name: "컨시어지 수첩", sort_order: 5 },
     { name: "추가 요청", sort_order: 6 },
   ];
   // categories 는 자연 unique 키가 없으므로 매장 기준으로 기존 데이터 확인 후 없을 때만 삽입
@@ -108,14 +108,14 @@ async function main() {
     { category: "객실 정찬", name: "유령 신사의 비프 스튜", price: 19000, description: "오래된 기록 속에 자주 등장하는 깊고 진한 스튜", sort_order: 4, image_url: "https://www.themealdb.com/images/media/meals/sxxpst1468569714.jpg" },
     { category: "객실 정찬", name: "심야 로스트 치킨", price: 21000, description: "늦은 시간 투숙객이 가장 자주 찾는 메뉴", sort_order: 5, image_url: "https://www.themealdb.com/images/media/meals/nlxald1764112200.jpg" },
     // 심야 바 카트
-    { category: "심야 바 카트", name: "블러디 오렌지 에이드", price: 9000, description: "붉게 번지는 색감이 매력적인 심야 시그니처 드링크", sort_order: 1, image_url: "https://www.thecocktaildb.com/images/media/drink/ytsxxw1441167732.jpg" },
-    { category: "심야 바 카트", name: "월광 하이볼", price: 12000, description: "달빛 아래 천천히 즐기는 한 잔", sort_order: 2, image_url: "https://www.thecocktaildb.com/images/media/drink/dhvr7d1504519752.jpg" },
-    { category: "심야 바 카트", name: "심야 하우스 레드", price: 13000, description: "늦은 밤을 위한 하우스 레드 와인", sort_order: 3, image_url: "https://www.thecocktaildb.com/images/media/drink/iuwi6h1504735724.jpg" },
+    { category: "심야 바 카드", name: "블러디 오렌지 에이드", price: 9000, description: "붉게 번지는 색감이 매력적인 심야 시그니처 드링크", sort_order: 1, image_url: "https://www.thecocktaildb.com/images/media/drink/ytsxxw1441167732.jpg" },
+    { category: "심야 바 카드", name: "월광 하이볼", price: 12000, description: "달빛 아래 천천히 즐기는 한 잔", sort_order: 2, image_url: "https://www.thecocktaildb.com/images/media/drink/dhvr7d1504519752.jpg" },
+    { category: "심야 바 카드", name: "심야 하우스 레드", price: 13000, description: "늦은 밤을 위한 하우스 레드 와인", sort_order: 3, image_url: "https://www.thecocktaildb.com/images/media/drink/iuwi6h1504735724.jpg" },
     // 야간 디저트 라운지
     { category: "야간 디저트 라운지", name: "체크아웃 티라미수", price: 9500, description: "오늘 밤의 마지막을 가장 완벽하게 마무리하는 디저트", sort_order: 1, image_url: "https://www.themealdb.com/images/media/meals/qxutws1486978099.jpg" },
     { category: "야간 디저트 라운지", name: "월광 치즈케이크", price: 9000, description: "달빛처럼 조용하게 남는 부드러운 디저트", sort_order: 2, image_url: "https://www.themealdb.com/images/media/meals/swttys1511385853.jpg" },
     // 컨시어지 추천
-    { category: "컨시어지 추천", name: "Room 404 트러플 프라이", price: 11000, description: "이상하게도 늘 먼저 사라지는 객실 스낵", sort_order: 1, image_url: "https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg" },
+    { category: "컨시어지 수첩", name: "Room 404 트러플 프라이", price: 11000, description: "이상하게도 늘 먼저 사라지는 객실 스낵", sort_order: 1, image_url: "https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg" },
     // 추가 요청 (곁들임)
     { category: "추가 요청", name: "심야 치즈 플래터", price: 15000, description: "조용한 대화를 위한 곁들임 한 접시", sort_order: 1, image_url: "https://www.themealdb.com/images/media/meals/7i6csk1780094394.jpg" },
     { category: "추가 요청", name: "야식 감자 웨지", price: 7000, description: "부담 없이 더하는 심야의 곁들임", sort_order: 2, image_url: "https://www.themealdb.com/images/media/meals/1550441882.jpg" },
@@ -149,6 +149,14 @@ async function main() {
     await db.from("menus").update({ image_url: m.image_url }).eq("store_id", storeId).eq("name", m.name);
   }
   console.log("  ✅ 메뉴 이미지 음식 사진으로 최신화");
+
+  // 5.2) 오늘의 추천 기본 지정 (단일 — 전부 해제 후 하나만 지정)
+  await must(db.from("menus").update({ is_recommended: false }).eq("store_id", storeId), "추천 초기화");
+  await must(
+    db.from("menus").update({ is_recommended: true }).eq("store_id", storeId).eq("name", "체크인 스테이크"),
+    "오늘의 추천 지정",
+  );
+  console.log("  ✅ 오늘의 추천: 체크인 스테이크");
 
   // 5.5) 메뉴 옵션 (멱등: 기존 그룹 정리 후 재삽입, items 는 cascade 삭제) ------
   const menuIds = menus.map((m) => m.id);
@@ -234,11 +242,11 @@ async function main() {
 
   // 6) 원재료 ------------------------------------------------------------------
   const ingredientDefs = [
-    { name: "소고기 등심", unit: "g", sort_order: 1 },
-    { name: "파스타 면", unit: "g", sort_order: 2 },
-    { name: "트러플 오일", unit: "ml", sort_order: 3 },
-    { name: "블러드 오렌지", unit: "개", sort_order: 4 },
-    { name: "마스카포네", unit: "g", sort_order: 5 },
+    { name: "소고기 안심", unit: "g", sort_order: 1 },      // 육류
+    { name: "파스타 면", unit: "g", sort_order: 2 },        // 파스타
+    { name: "하우스 레드 와인", unit: "ml", sort_order: 3 }, // 주류
+    { name: "트러플 오일", unit: "ml", sort_order: 4 },
+    { name: "마스카포네", unit: "g", sort_order: 5 },        // 디저트 재료
   ];
   const existingIng = await must(
     db.from("ingredients").select("id").eq("store_id", storeId),

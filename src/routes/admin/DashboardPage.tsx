@@ -37,7 +37,7 @@ export function DashboardPage() {
         }
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : "주문을 불러오지 못했습니다.");
+      setError(e instanceof Error ? e.message : "요청을 불러오지 못했습니다.");
     } finally {
       setLoading(false);
     }
@@ -74,7 +74,7 @@ export function DashboardPage() {
 
   return (
     <div>
-      <h1 className="admin-page-title">주문 대시보드</h1>
+      <h1 className="admin-page-title">요청 대시보드</h1>
 
       <ConnectionBanner status={status} retryCount={retryCount} />
 
@@ -85,14 +85,14 @@ export function DashboardPage() {
             <div className="value">{formatWon(summary.totalSales)}</div>
           </div>
           <div className="summary-card">
-            <div className="label">오늘 총 주문 건수</div>
+            <div className="label">오늘 총 요청 건수</div>
             <div className="value">{summary.orderCount}건</div>
           </div>
         </div>
       )}
 
       <div className="filter-bar">
-        <span className="muted">테이블 필터:</span>
+        <span className="muted">객실 필터:</span>
         <button className={`chip ${filterTableId === null ? "active" : ""}`} onClick={() => setFilterTableId(null)}>
           전체
         </button>
@@ -161,7 +161,7 @@ function TableCardView({ card, isNew, onClick }: { card: TableCard; isNew: boole
   if (isNew) cls.push("new-order");
   return (
     <div className={cls.join(" ")} onClick={onClick} role="button" tabIndex={0}>
-      <div className="tnum">{card.table.tableNumber}번 테이블</div>
+      <div className="tnum">{card.table.tableNumber}번 객실</div>
       {card.isEmpty ? (
         <div className="tpreview" style={{ marginTop: 8 }}>
           비어있음
@@ -171,7 +171,7 @@ function TableCardView({ card, isNew, onClick }: { card: TableCard; isNew: boole
           <div className="ttotal">{formatWon(card.totalAmount)}</div>
           <div className="tpreview">{orderPreview(card.latestOrder)}</div>
           <div className="badge-count" style={{ marginTop: 6 }}>
-            주문 {card.orderCount}건
+            요청 {card.orderCount}건
           </div>
         </>
       )}
@@ -212,12 +212,12 @@ function OrderDetailModal({
   };
 
   return (
-    <Modal title={`${card.table.tableNumber}번 테이블 주문 상세`} onClose={onClose}>
+    <Modal title={`${card.table.tableNumber}번 객실 요청 상세`} onClose={onClose}>
       {error && <div className="form-error">{error}</div>}
       <div style={{ marginBottom: 12 }}>
-        총 주문액 <strong>{formatWon(card.totalAmount)}</strong> · {card.orderCount}건
+        총 요청액 <strong>{formatWon(card.totalAmount)}</strong> · {card.orderCount}건
       </div>
-      {sorted.length === 0 && <p className="muted">표시할 주문이 없습니다.</p>}
+      {sorted.length === 0 && <p className="muted">표시할 요청이 없습니다.</p>}
       {sorted.map((order) => {
         const next = nextStatus(order.status);
         return (
@@ -228,7 +228,7 @@ function OrderDetailModal({
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span>
-                <strong>주문 #{order.orderNumber}</strong> · {formatTime(order.createdAt)}
+                <strong>요청 #{order.orderNumber}</strong> · {formatTime(order.createdAt)}
               </span>
               <span className={`status-badge ${order.status}`}>{ORDER_STATUS_LABEL[order.status]}</span>
             </div>

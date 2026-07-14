@@ -24,7 +24,7 @@ export function LoginPage() {
     setError(null);
     clearSessionMessage();
     if (!storeCode.trim() || !username.trim() || !password) {
-      setError("매장 식별자, 사용자명, 비밀번호를 모두 입력해 주세요.");
+      setError("호텔 식별자, 사용자명, 비밀번호를 모두 입력해 주세요.");
       return;
     }
     setLoading(true);
@@ -46,8 +46,8 @@ export function LoginPage() {
   return (
     <div className="login-wrap">
       <form className="login-card" onSubmit={onSubmit}>
-        <h1>테이블오더 관리자</h1>
-        <p className="sub">매장 관리 시스템에 로그인하세요.</p>
+        <h1>녹턴 호텔 관리자</h1>
+        <p className="sub">호텔 관리 시스템에 로그인하세요.</p>
 
         {sessionMessage && <div className="form-error">{sessionMessage}</div>}
         {error && (
@@ -57,7 +57,7 @@ export function LoginPage() {
         )}
 
         <div className="field">
-          <label htmlFor="storeCode">매장 식별자</label>
+          <label htmlFor="storeCode">호텔 식별자</label>
           <input
             id="storeCode"
             list="recent-stores"

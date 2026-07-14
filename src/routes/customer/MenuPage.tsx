@@ -32,11 +32,20 @@ export function MenuPage() {
     load();
   }, [load]);
 
-  // 컨시어지 추천: '컨시어지 추천' 카테고리가 있으면 그 메뉴, 없으면 판매 중 메뉴 일부
+  // 컨시어지 추천: '오늘의 추천' 지정 메뉴를 최우선, 이어서 '컨시어지 수첩' 카테고리
   const featured = useMemo(() => {
+    const rec = menus.filter((m) => m.isRecommended && !m.isSoldOut);
     const cat = categories.find((c) => c.name.includes("컨시어지"));
-    const pool = cat ? menus.filter((m) => m.categoryId === cat.id) : menus.filter((m) => !m.isSoldOut);
-    return pool.slice(0, 6);
+    const catMenus = cat ? menus.filter((m) => m.categoryId === cat.id) : menus.filter((m) => !m.isSoldOut);
+    const seen = new Set<string>();
+    const out: CustomerMenu[] = [];
+    for (const m of [...rec, ...catMenus]) {
+      if (!seen.has(m.id)) {
+        seen.add(m.id);
+        out.push(m);
+      }
+    }
+    return out.slice(0, 6);
   }, [categories, menus]);
 
   const shownCats = activeCat ? categories.filter((c) => c.id === activeCat) : categories;
@@ -90,6 +99,7 @@ export function MenuPage() {
                 <img className="cc-img" src={menu.imageUrl} alt="" />
                 {menu.isSoldOut && <div className="soldout-veil">오늘 밤은 더 이상 준비할 수 없습니다</div>}
                 <div className="cc-body">
+                  {menu.isRecommended && <div className="cc-badge">오늘의 추천</div>}
                   <div className="cc-name">{menu.name}</div>
                   <div className="cc-price">{formatWon(menu.price)}</div>
                 </div>

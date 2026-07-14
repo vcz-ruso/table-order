@@ -12,7 +12,7 @@ import {
 } from "../../_lib/validation.js";
 
 const MENU_SELECT =
-  "id, category_id, name, price, description, image_url, sort_order, is_hidden, is_sold_out, categories(name)";
+  "id, category_id, name, price, description, image_url, sort_order, is_hidden, is_sold_out, is_recommended, categories(name)";
 
 function menuId(req: VercelRequest): string {
   const id = req.query.id;
@@ -81,6 +81,15 @@ export default withAuth(
     if ("isSoldOut" in body) {
       if (typeof body.isSoldOut !== "boolean") throw new ApiError(422, "VALIDATION", "isSoldOut 는 boolean 이어야 합니다.");
       patch.is_sold_out = body.isSoldOut;
+    }
+    if ("isRecommended" in body) {
+      if (typeof body.isRecommended !== "boolean")
+        throw new ApiError(422, "VALIDATION", "isRecommended 는 boolean 이어야 합니다.");
+      if (body.isRecommended) {
+        // 단일 제약: '오늘의 추천'은 매장당 1개만 → 지정 시 나머지 전부 해제
+        await db.from("menus").update({ is_recommended: false }).eq("store_id", user.storeId);
+      }
+      patch.is_recommended = body.isRecommended;
     }
 
     if (Object.keys(patch).length === 0) {

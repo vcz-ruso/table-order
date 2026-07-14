@@ -18,13 +18,13 @@ export function AdminLayout() {
   return (
     <div className="admin-root">
       <aside className="admin-sidebar">
-        <div className="admin-brand">테이블오더</div>
+        <div className="admin-brand">녹턴 호텔</div>
         <div className="admin-store">
           {user?.storeName} <span className="muted">({user?.storeCode})</span>
         </div>
         <nav className="admin-nav">
-          <NavLink to="/admin/dashboard">주문 대시보드</NavLink>
-          <NavLink to="/admin/tables">테이블 관리</NavLink>
+          <NavLink to="/admin/dashboard">요청 대시보드</NavLink>
+          <NavLink to="/admin/tables">객실 관리</NavLink>
           {isOwner && <NavLink to="/admin/menus">메뉴 관리</NavLink>}
           {isOwner && <NavLink to="/admin/sales">매출</NavLink>}
           {isOwner && <NavLink to="/admin/inventory">재고</NavLink>}
@@ -32,7 +32,7 @@ export function AdminLayout() {
         <div className="admin-user-box">
           <div>
             {user?.username}
-            <span className="role">{isOwner ? "Owner" : "Staff"}</span>
+            <span className="role">{isOwner ? "Manager" : "Staff"}</span>
           </div>
           <button
             className="btn btn-sm"

@@ -16,7 +16,7 @@ export default withTable(async (req, res, { table }) => {
 
   const { data: menus, error: mErr } = await db
     .from("menus")
-    .select("id, category_id, name, price, description, image_url, sort_order, is_sold_out, categories(name)")
+    .select("id, category_id, name, price, description, image_url, sort_order, is_sold_out, is_recommended, categories(name)")
     .eq("store_id", table.storeId)
     .eq("is_hidden", false)
     .order("sort_order");
@@ -83,6 +83,7 @@ export default withTable(async (req, res, { table }) => {
       description: m.description,
       imageUrl: m.image_url,
       isSoldOut: m.is_sold_out,
+      isRecommended: m.is_recommended,
       options: gm ? [...gm.values()] : [],
     };
   });
