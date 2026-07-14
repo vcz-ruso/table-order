@@ -48,18 +48,30 @@ npm run typecheck # 타입 검사만
 ```
 table-order/
 ├── api/                  # Vercel Serverless Functions (Node.js)
-│   └── health.ts         # 헬스체크 샘플
+│   ├── [...path].ts      # 단일 catch-all 함수 — 모든 /api/* 요청을 내부 라우팅
+│   │                     #   (Hobby 무료 플랜의 함수 12개 제한 대응: 함수 1개로 통합)
+│   ├── _routes/          # 실제 엔드포인트 핸들러 (언더스코어 → 함수로 배포 안 됨)
+│   │   ├── auth/  orders/  tables/  menus/  sales/  inventory/  customer/
+│   └── _lib/             # 공통 라이브러리(인증/검증/미들웨어/매퍼 등)
 ├── src/                  # React SPA
 │   ├── main.tsx          # 진입점
 │   ├── App.tsx           # 라우팅
-│   ├── lib/supabase.ts   # Supabase 클라이언트
+│   ├── lib/              # supabase 클라이언트, api 클라이언트, 타입, 계산 로직
+│   ├── auth/             # 관리자 인증 컨텍스트/가드
+│   ├── customer/         # 고객 컨텍스트/실시간 훅
 │   ├── routes/
-│   │   ├── customer/     # 고객용 화면
+│   │   ├── customer/     # 고객(투숙객) 룸서비스 화면
 │   │   └── admin/        # 관리자용 화면
 │   └── test/             # 테스트 (툴체인 sanity 포함)
+├── supabase/             # 마이그레이션 SQL / 시드 / 마이그레이션 러너
 ├── aidlc-docs/           # AI-DLC 문서 (요구사항/설계/감사 로그)
 └── requirements/         # 원본 요구사항 문서
 ```
+
+> **무료(Hobby) 배포 주의**: Vercel Hobby 플랜은 배포당 서버리스 함수 최대 12개입니다.
+> 엔드포인트가 20개이므로, 단일 catch-all 함수(`api/[...path].ts`)에서 내부 라우팅하여
+> **함수 1개**로 배포합니다. 새 엔드포인트는 `api/_routes/`에 추가하고 `api/[...path].ts`의
+> 라우팅 테이블에만 등록하면 됩니다(함수 수는 그대로 1개).
 
 ## 관리자(Admin) 기능
 매장 관리자(Owner/Staff)용 풀스택 기능이 구현되어 있습니다.

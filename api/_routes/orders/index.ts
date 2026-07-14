@@ -1,7 +1,7 @@
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { withAuth } from "../_lib/middleware";
-import { mapOrder, type DbOrder } from "../_lib/mappers";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { withAuth } from "../../_lib/middleware";
+import { mapOrder, type DbOrder } from "../../_lib/mappers";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
 
 // GET /api/orders — 대시보드용 현재(active 세션) 주문 목록 + 테이블/세션 정보.
 // Owner/Staff 모두 접근 가능.

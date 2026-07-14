@@ -1,6 +1,6 @@
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { withAuth } from "../_lib/middleware";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { withAuth } from "../../_lib/middleware";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
 
 // 현재 로그인 사용자 정보. 앱 로드 시 세션 유효성 확인 + 사용자 복원에 사용.
 export default withAuth(async (req, res, { user }) => {

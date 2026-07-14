@@ -1,7 +1,7 @@
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { withAuth } from "../_lib/middleware";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
-import { asObject, requireUuid } from "../_lib/validation";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { withAuth } from "../../_lib/middleware";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
+import { asObject, requireUuid } from "../../_lib/validation";
 
 // POST /api/tables/complete { tableId } — 매장 이용 완료: active 세션 종료.
 // 종료된 세션의 주문은 자동으로 '과거 내역'이 되며, 현재 주문 목록/총액은 0으로 리셋된다

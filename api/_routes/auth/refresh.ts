@@ -5,11 +5,11 @@ import {
   signAccessToken,
   signRefreshToken,
   verifyRefreshToken,
-} from "../_lib/auth";
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { publicHandler } from "../_lib/middleware";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
-import { asObject, requireString } from "../_lib/validation";
+} from "../../_lib/auth";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { publicHandler } from "../../_lib/middleware";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
+import { asObject, requireString } from "../../_lib/validation";
 
 export default publicHandler(async (req: VercelRequest, res: VercelResponse) => {
   assertMethod(req, ["POST"]);

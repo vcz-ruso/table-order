@@ -1,15 +1,15 @@
 import type { VercelRequest } from "@vercel/node";
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { withAuth } from "../_lib/middleware";
-import { mapMenu, type DbMenu } from "../_lib/mappers";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { withAuth } from "../../_lib/middleware";
+import { mapMenu, type DbMenu } from "../../_lib/mappers";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
 import {
   asObject,
   isValidImageUrl,
   requireInt,
   requireString,
   requireUuid,
-} from "../_lib/validation";
+} from "../../_lib/validation";
 
 const MENU_SELECT =
   "id, category_id, name, price, description, image_url, sort_order, is_hidden, is_sold_out, categories(name)";

@@ -1,6 +1,6 @@
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { withTable } from "../_lib/middleware";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { withTable } from "../../_lib/middleware";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
 
 // GET /api/customer/session — 현재 테이블의 active 세션 id (없으면 null).
 // 세션 종료 감지(장바구니/조회 범위 초기화) 및 자동 로그인 유효성 확인에 사용.

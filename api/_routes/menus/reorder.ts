@@ -1,7 +1,7 @@
-import { ApiError, assertMethod, sendJson } from "../_lib/http";
-import { withAuth } from "../_lib/middleware";
-import { supabaseAdmin } from "../_lib/supabaseAdmin";
-import { asObject, requireUuid } from "../_lib/validation";
+import { ApiError, assertMethod, sendJson } from "../../_lib/http";
+import { withAuth } from "../../_lib/middleware";
+import { supabaseAdmin } from "../../_lib/supabaseAdmin";
+import { asObject, requireUuid } from "../../_lib/validation";
 
 // POST /api/menus/reorder { categoryId, orderedIds: string[] }
 // 같은 카테고리 내 메뉴 노출 순서를 orderedIds 배열 순서대로 저장. (Owner 전용)
